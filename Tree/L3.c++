@@ -38,6 +38,36 @@ Node* built_tree(){
 
 void print_zig_zag(Node* root){
     queue<Node* > q1;
+    q1.push(root);
+    bool leftToRight = true;
+
+    while(!q1.empty()){
+        int size = q1.size();
+        vector<int> ans;
+        for(int i = 0; i < size; i++){
+            Node* temp = q1.front();
+            q1.pop();
+
+            int j = leftToRight ? i : size - i - 1;
+            ans[i] = temp->data;
+
+            if(temp->left){
+                q1.push(temp->left);
+            }
+
+            if(temp->right){
+                q1.push(temp->right);
+            }
+        }
+
+        leftToRight = !leftToRight;
+
+        for(auto it : ans){
+            cout << it <<",  ";
+        }
+    }
+
+    return ;
 }
 
 int main(){
