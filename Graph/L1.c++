@@ -1,6 +1,36 @@
 #include<iostream>
+#include<vector>
+
 using namespace std;
 
 int main(){
+    int n;
+    cout<<"Enter the total number of nodes "<< endl;
+    cin>> n;
+
+    int m;
+    cout <<"Enter the total number of egges "<< endl;
+    cin>> m;
+
+    vector<vector<int>> matrix(n+1, vector<int>(n+1, 0));
+
+    for(int i = 0; i < m; i++){
+        int u, v;
+        cin>> u >> v;
+
+        matrix[u][v] = 1;
+        matrix[v][u] = 1;
+    }
+
+    cout <<"Nodes are in the graph.... "<< endl;
+
+    for(int i = 0; i < n+1; i++){
+        for(int j = 0; j < n+1; j++){
+            cout << matrix[i][j]<<",  ";
+        }
+
+        cout << endl ;
+    }
+
     return 0;
 }
