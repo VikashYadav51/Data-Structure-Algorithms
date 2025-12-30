@@ -1,5 +1,7 @@
 #include<iostream>
 #include<map>
+#include<vector>
+
 using namespace std;
 
 class Node{
@@ -73,6 +75,117 @@ pair<int, int> LPS(Node* root){
 }
 
 
+bool find_path(Node* root, int n1, vector<int> &result){
+    if(root == nullptr){
+        return false;
+    }
+
+    if(root->data == n1){
+        return true;
+    }
+
+    result.push_back(root->data);
+
+    if(find_path(root->left, n1, result) || find_path(root->right, n1, result)){
+        return true;
+    }
+
+    result.pop_back();
+    return false;
+}
+
+Node* find_LCA(Node* root, int n1, int n2){
+    if(root == nullptr){
+        return nullptr;
+    }
+
+    if(root->data == n1 || root->data == n2){
+        return root;
+    }
+
+    Node* left = find_LCA(root->left, n1, n2);
+
+    Node* right = find_LCA(root->right, n1, n2);
+
+    if(left != nullptr && right!= nullptr){
+        return root;
+    }
+
+    else if(left != nullptr && right == nullptr){
+        return left;
+    }
+
+    else if(left == nullptr && right != nullptr){
+        return right;
+    }
+
+    else{
+        return nullptr;
+    }
+}
+
+
+void K_sum_path(Node* root, int &count, vector<int> &result, int value){
+    if(root == nullptr){
+        return ;
+    }
+
+    result.push_back(root->data);
+
+    K_sum_path(root->left, count, result, value);
+
+    K_sum_path(root->right, count, result, value);
+
+    int sum = 0;
+    int size = result.size();
+
+    for(int i = size - 1; i>=0; i--){
+        sum = sum  + result[i];
+        if(sum == value){
+            count++;
+        }
+    }
+
+    result.pop_back();
+
+    return ;
+}
+
+Node* K_Ancestor(Node* root, int n1, int &count, int &variable){
+    if(root == nullptr){
+        return nullptr;
+    }
+
+    if(root->data == n1){
+        return root;
+    }
+
+    Node* left = K_Ancestor(root->left, n1, count, variable);
+
+    Node* right = K_Ancestor(root->right, n1, count, variable);
+
+    if(left){
+        count--;
+        if(count == 0){
+            variable = root->data;
+            count = INT32_MAX;
+        }
+        return root;
+    }
+
+    else if(right){
+        count--;
+        if(count == 0){
+            variable = root->data;
+            count = INT32_MAX;
+        }
+        return root;
+    }
+
+    else{
+        return nullptr;
+    }
+}
 
 
 
