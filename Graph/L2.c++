@@ -15,7 +15,7 @@ void BFS(int start, vector<bool> &visited, vector<int> &result, vector<int> list
         q1.pop();
         result.push_back(data);
 
-        for(auto it : list[start]){
+        for(auto it : list[data]){
             if(!visited[it]){
                 visited[it] = true;
                 q1.push(it);
