@@ -35,6 +35,45 @@ Node* built_tree(){
     return root;
 }
 
+pair<int, int> LPS(Node* root){
+    if(root == nullptr){
+        return make_pair(0,0);
+    }
+
+    pair<int, int> left = LPS(root->left);
+
+    pair<int, int> right = LPS(root->right);
+
+    pair<int, int> ans;
+
+    int op1 = left.first;
+
+    int op2 = right.first;
+
+    int op3 = left.second;
+
+    int op4 = right.second;
+
+    if(op1 > op2){
+        ans.first = op1 + 1;
+        ans.second = root->data + op3;
+    }
+
+    else if(op1 == op2){
+        ans.first = op1 + 1;
+        ans.second = max(op3, op4)  +root->data;
+    }
+
+    else{
+        ans.first = op2 + 1;
+        ans.second = op4 + root->data;
+    }
+
+    return ans;
+}
+
+
+
 
 
 
