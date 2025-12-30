@@ -1,6 +1,7 @@
 #include<iostream>
 #include<map>
 #include<vector>
+#include<queue>
 
 using namespace std;
 
@@ -187,11 +188,50 @@ Node* K_Ancestor(Node* root, int n1, int &count, int &variable){
     }
 }
 
+void Maximum_sum_Non_Adjacent_Element(Node* root, int &evenSum, int &oddSum){
+    if(root == nullptr){
+        return ;
+    }
+
+    queue<Node* >q1;
+    q1.push(root);
+    int level = 0;
+
+    while(!q1.empty()){
+        int size = q1.size();
+
+        for(int i = 0; i < size; i++){
+            Node* temp = q1.front();
+            q1.pop();
+    
+            if(level % 2 == 0){
+                evenSum = evenSum + root->data;
+            }
+    
+            else{
+                oddSum = oddSum + root->data;
+            }
+    
+            if(temp->left){
+                q1.push(temp->left);
+            }
+    
+            if(temp->right){
+                q1.push(root->right);
+            }
+        }
+
+        level = level + 1;
+    }
+
+    return ;
+}
+
 
 
 
 
 int main(){
-    return 0;
+
 }
 
