@@ -48,7 +48,6 @@ Each folder contains:
 
 ## 💻 Languages Used
 - C++
-- JavaScript
 
 ---
 
@@ -106,5 +105,5 @@ If you find this repository helpful, consider giving it a ⭐
 ## 📬 Author
 
 **Vikash Yadav**  
-GitHub: https://github.com/your-username
+GitHub: https://github.com/VikaashYadav51
 
