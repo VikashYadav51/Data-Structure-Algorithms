@@ -227,11 +227,58 @@ void Maximum_sum_Non_Adjacent_Element(Node* root, int &evenSum, int &oddSum){
     return ;
 }
 
-
-
-
-
 int main(){
+    Node* root = nullptr;
+    root = built_tree();
+
+    // Calculate Maximum sum of longest path........
+    pair<int, int> calculateSum = LPS(root);
+    cout <<"Longest path of Maximum sum "<< endl << calculateSum.second << endl;
+
+
+    //   First  Method to find the common Ancestor of tree ...SC... O(n)......
+    vector<int> ans1;
+    vector<int> ans2;
+
+    int n1;
+    cout <<"Enter the value of n1 "<< endl;
+    cin>> n1;
+
+    int n2;
+    cout <<"Enter the value of n2 "<< endl;
+    cin>> n2;
+
+    bool op1 = find_path(root, n1, ans1);
+    bool op2 = find_path(root, n2, ans2);
+
+    int size = min(ans1.size(), ans2.size());
+    int commonData = -1;
+    for(int i = 0; i < size; i++){
+        if(ans1[i] == ans2[1]){
+            commonData = ans1[i];
+        }
+        else{
+            break;
+        }
+    }
+
+    cout <<"Common Ancestor of tree is "<< endl << commonData << endl;
+
+    //  Second Method to find the common Ancestor of tree ...SC... O(1)......
+    Node* data = find_LCA(root, n1, n2);
+    cout << "Common Ancestor of tree is "<< endl << data->data << endl;
+
+
+
+    // K Sum Path
+    int count = 0;
+    vector<int> result;
+    int value = 7;
+    K_sum_path(root, count, result, value);
+    cout << "Total path sum of equal to k "<< endl;
+    cout << count << endl;
+
+
 
 }
 
