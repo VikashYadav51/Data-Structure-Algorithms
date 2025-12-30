@@ -138,8 +138,6 @@ void print_right_node(Node* root, vector<int> &ans){
     return ;
 }
 
-
-
 void print_boundary_element(Node* root){
     vector<int> ans;
     ans.push_back(root->data);
@@ -196,7 +194,15 @@ void print_verticalorder(Node* root){
         }
 
         if(frontNode->right){
-            q1.push(make_pair(root->right, make_pair(vd + 1, hd + 1)));
+            q1.push(make_pair(frontNode->right, make_pair(vd + 1, hd + 1)));
+        }
+    }
+
+    for(auto i : mapping){
+        for(auto j : i.second){
+            for(auto k : j.second){
+                cout << k <<",  ";
+            }
         }
     }
 
@@ -223,7 +229,7 @@ void print_top_element(Node* root){
 
         // mapping.emplace(vd, frontNode->data);
 
-        if(mapping.find(vd) != mapping.end()){
+        if(mapping.find(vd) == mapping.end()){
             mapping[vd] = frontNode->data;
         }
 
@@ -236,6 +242,12 @@ void print_top_element(Node* root){
         }
 
     }
+
+    for(auto i : mapping){
+        cout << i.second << ",  ";
+    }
+
+    return ;
 }
 
 void print_bottom_element(Node* root){
@@ -266,16 +278,39 @@ void print_bottom_element(Node* root){
         }
     }
 
+    for(auto i : mapping){
+        cout << i.second << ",  ";
+    }
+
     return ;
 
 }
 
-
-
-
-
-
-
 int main(){
+
+    Node* root = nullptr;
+    root = built_tree();
+
+    cout <<"Print the element in Zig Zag order "<< endl;
+    print_zig_zag(root);
+    cout << endl << endl;
+
+    cout <<"Print the  boundary element "<< endl;
+    print_boundary_element(root);
+    cout << endl << endl;
+
+    cout << "Print the vertical order element "<< endl;
+    print_verticalorder(root);
+    cout << endl << endl;
+
+    cout <<"Print the top  order element "<< endl;
+    print_top_element(root);
+    cout << endl << endl;
+
+    cout <<"Print the bottom order element " << endl;
+    print_bottom_element(root);
+    cout << endl<< endl;
+
+
 
 }
