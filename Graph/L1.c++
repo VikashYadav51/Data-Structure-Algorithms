@@ -12,7 +12,7 @@ int main(){
     cout <<"Enter the total number of egges "<< endl;
     cin>> m;
 
-    /*  store Graph data in adjancency matrix.....SC..O(n2)...
+    /*  //  store Graph data in adjancency matrix.....SC..O(n2)...
         vector<vector<int>> matrix(n+1, vector<int>(n+1, 0));
 
         for(int i = 0; i < m; i++){
