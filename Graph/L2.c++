@@ -49,7 +49,7 @@ int main(){
     vector<bool > visited(n, 0);
     vector<int> result;
 
-    for(int i = 0; i < m; i++){
+    for(int i = 0; i < n; i++){
         if(!visited[i]){
             BFS(i, visited, result, list);
         }
@@ -59,6 +59,6 @@ int main(){
         cout << it << ",  ";
     }
 
-    
+
 
 }
