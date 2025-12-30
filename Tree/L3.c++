@@ -1,6 +1,7 @@
 #include<iostream>
 #include<queue>
 #include<algorithm>
+#include<map>
 
 using namespace std;
 
@@ -169,6 +170,40 @@ void print_boundary_element(Node* root){
         cout << it <<",  ";
     }
 }
+
+void print_verticalorder(Node* root){
+    if(root == nullptr){
+        return  ;
+    }
+    queue<pair<Node*, pair<int, int> > > q1;
+    q1.push(make_pair(root, make_pair(0,0)));
+
+    map<int, map<int, vector<int> > > mapping;
+
+    while(!q1.empty()){
+        pair<Node*, pair<int, int> > temp = q1.front();
+        q1.pop();
+
+        Node* frontNode = temp.first;
+
+        int vd = temp.second.first;
+        int hd = temp.second.second;
+
+        mapping[vd][hd].push_back(frontNode->data);
+
+        if(frontNode->left){
+            q1.push(make_pair(frontNode->left, make_pair(vd-1, hd+1)));
+        }
+
+        if(frontNode->right){
+            q1.push(make_pair(root->right, make_pair(vd + 1, hd + 1)));
+        }
+    }
+
+    return ;
+}
+
+
 
 
 
