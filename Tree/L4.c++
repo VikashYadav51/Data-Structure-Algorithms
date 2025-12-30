@@ -1,29 +1,43 @@
 #include<iostream>
 #include<map>
-
 using namespace std;
 
-int main(){
-    map<int, int> mapping;
+class Node{
+    public:
+    int data;
+    Node* left;
+    Node* right;
 
-    mapping[1] = 10;
-    mapping[2] = 20;
-    mapping[3] = 5;
-
-    mapping[5] = 4;
-
-    mapping[6] = 5;
-
-    mapping.emplace(6,55);
-
-    int count = 0;
-
-    for(int i = 1; i < 7; i++){
-        if(mapping[i] < 7){
-            cout <<  i << ",  "<< mapping[i] << endl;
-            count++;
-        }
+    Node(int element){
+        this->data = element;
+        this->left = nullptr;
+        this->right = nullptr;
     }
-    
-    cout << count;
+};
+
+Node* built_tree(){
+    int data;
+    cout <<"Enter the data "<< endl;
+    cin>> data;
+
+    if(data == -1){
+        return nullptr;
+    }
+
+    Node* root = new Node(data);
+
+    cout <<"Enter the data left side of "<< data << " -> "<< endl;
+    root->left = built_tree();
+
+    cout <<"Enter the data right side of "<< data << " -> "<< endl;
+    root->right = built_tree();
+
+    return root;
 }
+
+
+
+int main(){
+    return 0;
+}
+
