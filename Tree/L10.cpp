@@ -91,12 +91,141 @@ Node* insertion_BST(Node* root, int element){
     else{
         root->right = insertion_BST(root->right, element);
     }
-
-
 }
 
+bool serach_element(Node* root, int target){
+    if(root == nullptr){
+        return false;
+    }
+
+    if(target == root->data){
+        return true;
+    }
+
+    if(target < root->data){
+        bool op1 = serach_element(root->left, target);
+    }
+
+    else{
+        serach_element(root->right, target);
+    }
+
+    return false;
+}
+
+bool element_search(Node* root, int target){
+    if(root == nullptr){
+        return false;
+    }
+
+    Node* temp = root;
+
+    while(!temp){
+        if(root->data == target){
+            return true;
+        }
+
+        if(target < root->data){
+            temp = temp->left;
+        }
+
+        else{
+            temp = temp->right;
+        }
+    }
+
+    return false;
+}
+
+int mini_value(Node* root){
+    if(root->left == nullptr){
+        return root->data;
+    }
+
+    return mini_value(root->left);
+}
+
+int maxi_value(Node* root){
+    if(root->right == nullptr){
+        return root->data;
+    }
+    return maxi_value(root->right);
+}
+
+void find_pre_succ(Node* root, int target, int &pre, int &succ){
+    if(root == nullptr){
+        return ;
+    }
+    if(target == root->data){
+        if(root->left){
+            pre = root->left->data;
+        }
+        if(root->right){
+            succ = root->right->data;
+        }
+
+        return ;
+    }
+
+    succ = root->data;
+
+    if(target < root->data){
+        find_pre_succ(root->left, target, pre, succ);
+    }
+
+    else{
+        find_pre_succ(root->right, target, pre, succ);
+    }
+}
+
+Node* delete_element(Node* root, int target){
+    if(root == nullptr){
+        return nullptr;
+    }
+
+    if(target == root->data){
+        // deletion code....
+
+        // ....Zero child....
+
+        if(root->left == nullptr && root->right == nullptr){
+            delete(root);
+            return ;
+        }
+
+        // one child...left only...or right only exist....
+        if(root->left != nullptr && root->right == nullptr){
+            Node* newNode = root->left;
+            delete(root);
+            return newNode;
+        }
+
+        if(root->right != nullptr && root->left == nullptr){
+            Node* newNode = root->right;
+            delete root;
+            return newNode;
+        }
 
 
+        // .....both child is exist......
+        if(root->left != nullptr && root->right == nullptr){
+            
+        }
+
+
+
+    }
+
+    if(target < root->data){
+        root->left = delete_element(root->left, target);
+    }
+
+    else{
+        root->right = delete_element(root->right, target);
+    }
+
+    return ;
+}
 
 
 int main(){
@@ -106,10 +235,36 @@ int main(){
 
     print_LOT(root);
 
+    // cout << endl << endl;
+
+    // insertion_BST(root, 7);
+
+    // print_LOT(root);
+
+    // cout << endl << endl;
+
+    // cout <<"Minimum value of BST "<< endl;
+    // int ans1 = mini_value(root);
+    // cout << ans1 << endl;
+
+    // cout <<"maximum value of BST "<< endl;
+    // int ans2 = maxi_value(root);
+    // cout << ans2 <<  endl ;
+
+
     cout << endl << endl;
 
-    insertion_BST(root, 7);
+    int pre = -1;
+    int succ = -1;
 
-    print_LOT(root);
+    int target;
+    cout <<"Enter the value of target "<< endl;
+    cin>> target;
+
+    find_pre_succ(root, target, pre, succ);
+
+    cout << pre <<",  "<< succ << endl;
+
+
 
 }
