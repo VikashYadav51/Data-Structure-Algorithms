@@ -178,6 +178,18 @@ void find_pre_succ(Node* root, int target, int &pre, int &succ){
     }
 }
 
+int find_predessor(Node* root){
+    if(root->left == nullptr){
+        return 0;
+    }
+
+    if(root->left == nullptr){
+        return root->data;
+    }
+
+    return find_predessor(root->left);
+}
+
 Node* delete_element(Node* root, int target){
     if(root == nullptr){
         return nullptr;
@@ -190,7 +202,7 @@ Node* delete_element(Node* root, int target){
 
         if(root->left == nullptr && root->right == nullptr){
             delete(root);
-            return ;
+            return nullptr;;
         }
 
         // one child...left only...or right only exist....
@@ -208,20 +220,22 @@ Node* delete_element(Node* root, int target){
 
 
         // .....both child is exist......
-        if(root->left != nullptr && root->right == nullptr){
-            
+        if(root->left != nullptr && root->right != nullptr){
+            int pre = find_predessor(root);
+            root->data = pre;
+            root->left = delete_element(root, pre);
+            return root;
         }
-
-
-
     }
 
     if(target < root->data){
         root->left = delete_element(root->left, target);
+        return  root;
     }
 
     else{
         root->right = delete_element(root->right, target);
+        return root;
     }
 
     return ;
