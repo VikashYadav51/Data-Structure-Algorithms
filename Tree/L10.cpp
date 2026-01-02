@@ -77,6 +77,24 @@ void print_LOT(Node* root){
     }
 }
 
+Node* insertion_BST(Node* root, int element){
+
+    if(root == nullptr){
+        root = new Node(element);
+        return root;
+    }
+
+    if(element < root->data){
+        root->left = insertion_BST(root->left, element);
+    }
+
+    else{
+        root->right = insertion_BST(root->right, element);
+    }
+
+
+}
+
 
 
 
@@ -85,6 +103,12 @@ int main(){
     Node* root = nullptr;
 
     takeInput(root);
+
+    print_LOT(root);
+
+    cout << endl << endl;
+
+    insertion_BST(root, 7);
 
     print_LOT(root);
 
