@@ -82,7 +82,4 @@ int main(){
     }
 
     cout << "First smallest elememt "<< arr[k]<< endl;
-
-
-
 }
