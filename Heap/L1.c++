@@ -130,17 +130,31 @@ int main(){
 
 
 
-    int arr[] = {-1, 52,53,54,52,50,51};
+    // int arr[] = {-1, 52,53,54,52,50,51};
+    // int size = sizeof(arr) / sizeof(arr[0]);
+
+    // int index  = size / 2;
+
+    // while(index > 0){
+    //     hepify_algo(arr, index, size);
+    //     index--;
+    // }
+
+    // print_heap(arr, size);
+
+
+
+
+
+    int arr[] = {-1, 70, 60, 55, 45, 50};
     int size = sizeof(arr) / sizeof(arr[0]);
+    int i = size - 1;
 
-    int index  = size / 2;
-
-    while(index > 0){
-        hepify_algo(arr, index, size);
-        index--;
+    while(i > 0){
+        swap(arr[i], arr[1]);
+        i--;
+        hepify_algo(arr, 1, i);
     }
 
     print_heap(arr, size);
-
-
 }
