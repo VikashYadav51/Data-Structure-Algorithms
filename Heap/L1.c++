@@ -37,18 +37,51 @@ class heap{
         }
         cout << endl;
     }
+
+    void delete_element(){
+        arr[1] = arr[size];
+        size--;
+
+        int index  = 1;
+
+        while(index < size){
+            int leftIndex = 2 *index;
+            int rightIndex = 2 * index + 1;
+            int largest = index;
+
+            if(leftIndex <= size && arr[index] < arr[leftIndex]){
+                largest = leftIndex;
+            }
+
+            if(rightIndex <= size && arr[largest] < arr[rightIndex]){
+                largest = rightIndex;
+            }
+
+            if(largest != index){
+                swap(arr[index], arr[largest]);
+                index = largest;
+            }
+
+            else{
+                break;
+            }
+        }
+    }
 };
 
 int main(){
     heap h1;
-    h1.insert(50);
     h1.insert(55);
     h1.insert(53);
-    h1.insert(52);
     h1.insert(54);
-    // h1.insert(40);
-    // h1.insert(45);
+    h1.insert(52);
+    h1.insert(50);
+    h1.insert(51);
+    h1.insert(52);
 
     cout <<"Print the heap data "<< endl;
+    h1.print();
+
+    h1.delete_element();
     h1.print();
 }
