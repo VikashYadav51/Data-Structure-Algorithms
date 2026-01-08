@@ -69,19 +69,78 @@ class heap{
     }
 };
 
+void hepify_algo(int arr[], int index, int size){
+    while(index < size){
+        int leftIndex = 2 * index;
+        int rightIndex = 2 *index + 1;
+        int largest = index;
+
+        if(leftIndex <= size && arr[index] < arr[leftIndex]){
+            largest = leftIndex;
+        }
+
+        if(rightIndex <= size && arr[largest] < arr[rightIndex]){
+            largest = rightIndex;
+        }
+
+        // Base consition.....
+        if(largest == index){
+            return ;
+        }
+
+
+        if(largest != index){
+            swap(arr[index], arr[largest]);
+            // index = largest;
+            hepify_algo(arr, largest, size);
+        }
+
+        // else{
+        //     break;
+        // }
+    }
+
+    return ;
+}
+
+void print_heap(int arr[], int size){
+    for(int i = 1; i < size; i++){
+        cout << arr[i]<<",  ";
+    }
+    cout << endl << endl;
+}
+
 int main(){
-    heap h1;
-    h1.insert(55);
-    h1.insert(53);
-    h1.insert(54);
-    h1.insert(52);
-    h1.insert(50);
-    h1.insert(51);
-    h1.insert(52);
+    // heap h1;
+    // h1.insert(55);
+    // h1.insert(53);
+    // h1.insert(54);
+    // h1.insert(52);
+    // h1.insert(50);
+    // h1.insert(51);
+    // h1.insert(52);
 
-    cout <<"Print the heap data "<< endl;
-    h1.print();
+    // cout <<"Print the heap data "<< endl;
+    // h1.print();
 
-    h1.delete_element();
-    h1.print();
+    // h1.delete_element();
+    // h1.print();
+
+
+
+
+
+    int arr[] = {-1, 52,53,54,52,50,51};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    int index  = size / 2;
+
+    while(index > 0){
+        hepify_algo(arr, index, size);
+        index--;
+    }
+
+    print_heap(arr, size);
+
+
 }
