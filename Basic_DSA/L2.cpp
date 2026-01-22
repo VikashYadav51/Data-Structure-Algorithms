@@ -34,4 +34,43 @@ int main(){
     // }
 
     // cout <<"Decimal number is "<< ans << endl;
+
+    int n;
+    cout <<"Enter the value of n "<< endl;
+    cin >> n;
+
+    switch(n){
+        case 3:{
+            cout <<"You are not allowed for the addmission "<< endl;
+        }
+
+        case 6:{
+            cout <<"You are allowed for the addmision of less than 1 class "<< endl;
+            break;
+        }
+
+        case 10:{
+            cout << "Eligibles for less than 5 "<< endl;
+            break;
+        }
+
+        case 15:{
+            cout <<"Eligibles for less than 10 class "<< endl;
+            break;
+        }
+
+        case 18 :{
+            cout <<"Eligibles for less than 12 class "<< endl;
+            break;
+        }
+
+        case 20:{
+            cout <<"Eligibles for everywhere "<< endl;
+            break;
+        }
+
+        default:{
+            cout <<"Enter a valid ages.."<< endl;
+        }
+    }
 }
