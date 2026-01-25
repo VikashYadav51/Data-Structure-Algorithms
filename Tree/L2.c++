@@ -62,14 +62,14 @@ int Maxi_dia(Node* root){
     return ans;
 }
 
-pair<int, int> maxi_dia(Node* root){
+pair<int, int> maximum_dia(Node* root){
     if(root == nullptr){
-        return make_pair(0, 0);
+        return make_pair(0,0);
     }
 
-    pair<int, int> left = maxi_dia(root->left);
+    pair<int, int> left = maximum_dia(root->left);
 
-    pair<int, int> right = maxi_dia(root->right);
+    pair<int, int> right = maximum_dia(root->right);
 
     int op1 = left.first;
 
@@ -77,13 +77,9 @@ pair<int, int> maxi_dia(Node* root){
 
     int op3 = left.second + right.second + 1;
 
-    pair<int, int> ans;
+    int op4 = max(op1, max(op2, op3));
 
-    ans.first = max(op1, max(op2, op3));
-
-    ans.second = max(left.second, right.second) + 1;
-
-    return ans;
+    return make_pair(op4, max(left.second, right.second) + 1);
 }
 
 pair<bool, int> check_balance_tree(Node* root){
@@ -150,7 +146,7 @@ int main(){
     int dia1 = Maxi_dia(root);
     cout <<"Maximum diameter of tree "<< endl << dia1 << endl;
 
-    pair<int, int> dia2 = maxi_dia(root);
+    pair<int, int> dia2 = maximum_dia(root);
     cout <<"Maximum diamter of tree "<< endl << dia2.first << endl;
 
     pair<bool, int> check = check_balance_tree(root);
