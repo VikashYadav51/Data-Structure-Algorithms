@@ -201,6 +201,43 @@ void print_verticalorder(Node* root){
     return ;
 }
 
+void print_vertical_order(Node* root){
+    if(root == nullptr){
+        return ;
+    }
+
+    map<int, vector<int> > mapping;
+    queue<pair<Node*, int> > q1;
+
+    q1.push({root, 0});
+
+    while(!q1.empty()){
+        pair<Node*, int>  temp  = q1.front();
+        q1.pop();
+
+        Node* firstNode = temp.first;
+        int vd = temp.second;
+
+        mapping[vd].push_back(firstNode->data);
+
+        if(firstNode->left){
+            q1.push({firstNode->left, vd - 1});
+        }
+
+        if(firstNode->right){
+            q1.push({firstNode->right, vd +  1});
+        }
+    }
+
+    for(auto it : mapping){
+        cout << it.first <<" -> ";
+        for(auto j : it.second){
+            cout << j <<",  ";
+        }
+        cout << endl;
+    }
+}
+
 void print_top_element(Node* root){
     if(root == nullptr){
         return ;
