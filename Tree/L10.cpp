@@ -103,11 +103,11 @@ bool serach_element(Node* root, int target){
     }
 
     if(target < root->data){
-        bool op1 = serach_element(root->left, target);
+        return serach_element(root->left, target);
     }
 
     else{
-        serach_element(root->right, target);
+        return serach_element(root->right, target);
     }
 
     return false;
