@@ -100,10 +100,6 @@ void print_left_node(Node* root, vector<int> &ans){
         return ;
     }
 
-    if(root->left == nullptr && root->right == nullptr){
-        return ;
-    }
-
     ans.push_back(root->data);
 
     if(root->left){
