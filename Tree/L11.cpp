@@ -102,6 +102,43 @@ bool isValidBST(Node* root) {
     return true;
 }
 
+// second Approach... for check BST...
+
+pair<bool, int> check_BST(Node* root){
+    if(root == nullptr){
+        return  {true, 0};
+    }
+
+    if(root->left  == nullptr){
+        return {true, INT32_MIN};
+    }
+
+    if(root->right == nullptr){
+        return {true, INT32_MAX};
+    }
+
+    pair<bool, int> left = check_BST(root->left);
+
+    pair<bool, int> right = check_BST(root->right);
+
+    int op1 = left.first;
+    
+    int op2 = right.first;
+
+    bool op3 = left.second;
+
+    bool op4 = right.second;
+
+    if(op3 && op4 && (root->data > op1 ) && (root->data < op2)){
+        return {true, root->data};
+    }
+
+    else{
+        return {false, root->data};
+    }
+}
+
+
 
 void k_smallest_element(Node* root, int k, int &count, int &value){
     if(root == nullptr){
