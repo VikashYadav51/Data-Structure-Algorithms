@@ -221,9 +221,8 @@ Node* delete_element(Node* root, int target){
         if(root->left != nullptr && root->right != nullptr){
             int value = predessor(root) ->data;
             root->data = value;
-            Node* temp = delete_element(root, value);
-
-            return temp;
+            root->left = delete_element(root, value);
+            return root;
         }
     }
 
@@ -277,7 +276,5 @@ int main(){
     find_pre_succ(root, target, pre, succ);
 
     cout << pre <<",  "<< succ << endl;
-
-
 
 }
