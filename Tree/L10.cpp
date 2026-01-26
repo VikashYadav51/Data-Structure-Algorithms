@@ -177,16 +177,15 @@ void find_pre_succ(Node* root, int target, int &pre, int &succ){
     }
 }
 
-int find_predessor(Node* root){
-    if(root->left == nullptr){
-        return 0;
+Node* predessor(Node* root){
+    Node* temp = root;
+    temp = temp->left;
+
+    while(temp->right != nullptr){
+        temp = temp->right;
     }
 
-    if(root->left == nullptr){
-        return root->data;
-    }
-
-    return find_predessor(root->left);
+    return temp;
 }
 
 Node* delete_element(Node* root, int target){
@@ -220,10 +219,11 @@ Node* delete_element(Node* root, int target){
 
         // .....both child is exist......
         if(root->left != nullptr && root->right != nullptr){
-            int pre = find_predessor(root);
-            root->data = pre;
-            root->left = delete_element(root, pre);
-            return root;
+            int value = predessor(root) ->data;
+            root->data = value;
+            Node* temp = delete_element(root, value);
+
+            return temp;
         }
     }
 
