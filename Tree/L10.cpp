@@ -109,8 +109,7 @@ bool serach_element(Node* root, int target){
     else{
         return serach_element(root->right, target);
     }
-
-    return false;
+    
 }
 
 bool element_search(Node* root, int target){
