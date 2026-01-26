@@ -36,24 +36,22 @@ Node* build_tree(){
     return root;
 }
 
-pair<int, int> maximum_dia(Node* root){
+void print_right_node(Node* root){
     if(root == nullptr){
-        return make_pair(0,0);
+        return ;
     }
 
-    pair<int, int> left = maximum_dia(root->left);
+    cout << root->data <<",  ";
 
-    pair<int, int> right = maximum_dia(root->right);
+    if(root->right){
+        print_right_node(root->right);
+    }
 
-    int op1 = left.first;
+    else{
+        print_right_node(root->left);
+    }
 
-    int op2 = right.first;
-
-    int op3 = left.second + right.second + 1;
-
-    int op4 = max(op1, max(op2, op3));
-
-    return make_pair(op4, max(left.second, right.second) + 1);
+    return ;
 }
 
 
