@@ -1,6 +1,7 @@
 #include<iostream>
 #include<queue>
 #include<vector>
+
 using namespace std;
 
 class Node{
@@ -16,44 +17,39 @@ class Node{
     }
 };
 
-Node* build_tree(){
-    int data;
-    cout <<"Enter the data "<< endl;
-    cin>> data;
-
-    if(data == -1){
-        return nullptr;
-    }
-
-    Node* root = new Node(data);
-
-    cout << "Enter the data left side of "<< data <<" -> "<< endl;
-    root->left = build_tree();
-
-    cout <<"Enter the data right side of "<< data <<" -> "<< endl;
-    root->right = build_tree();
-
-    return root;
-}
-
-void print_right_node(Node* root){
+Node* construct_BST(Node* root, int data){
     if(root == nullptr){
-        return ;
+        root = new Node(data);
+        return root;
     }
 
-    cout << root->data <<",  ";
-
-    if(root->right){
-        print_right_node(root->right);
+    if(data < root->data){
+        root->left = construct_BST(root->left, data);
     }
 
     else{
-        print_right_node(root->left);
+        root->right = construct_BST(root->right, data);
     }
 
-    return ;
+    return  root;
 }
 
+void take_input(Node* &root){
+    int data;
+    cout <<"Enter the data "<< endl;
+    cin >> data;
+
+    if(data == -1){
+        return ;
+    }
+    
+    root = construct_BST(root, data);
+
+    take_input(root);
+
+    return ;
+
+}
 
 
 
