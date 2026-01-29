@@ -132,13 +132,16 @@ void print_right_node(Node* root, vector<int> &ans){
 
 void print_boundary_element(Node* root){
     vector<int> ans;
-    ans.push_back(root->data);
+
+    if(root != nullptr){
+        ans.push_back(root->data);
+    }
 
     if(root->left){
         print_left_node(root->left, ans);
     }
 
-    if((root != nullptr) || (root->left!= nullptr && root->right != nullptr)){
+    if((root != nullptr) && (root->left!= nullptr || root->right != nullptr)){
         print_leaf_node(root, ans);
     }
 
