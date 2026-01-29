@@ -2,33 +2,91 @@
 #include<vector>
 #include<queue>
 
-
 using namespace std;
 
-long long maximumSubarraySum(vector<int>& nums, int k) {
-    priority_queue<int, vector<int>, greater<int> > mini;
-    int size = nums.size();
+class Node{
+    public:
+    int data;
+    Node* left;
+    Node* right;
 
-    for(int i = 0; i < size; i++){
-        int sum = 0;
-        for(int j = i; j < size; j++){
-            sum = sum + nums[j];
+    Node(int element){
+        this->data = element;
+        this->left =nullptr;
+        this->right = nullptr;
+    }
+};
 
-            if(mini.size() < k){
-                mini.push(sum);
-            }
 
-            else{
-                if(sum > mini.top()){
-                    mini.pop();
-                    mini.push(sum);
-                }
-            }
-        }
+Node*  construct_BST(Node* root, int data){
+    if(root == nullptr){
+        root = new Node(data);
+        return root;
     }
 
-    return mini.top();
+    if(data < root->data){
+        root->left = construct_BST(root->left, data);
+    }
+
+    else{
+        root->right = construct_BST(root->right, data);
+    }
+
+    return root;
 }
+
+void takeInput(Node* &root){
+    int data;
+    cout <<"Enter the data "<< endl;
+    cin>> data;
+
+    if(data != -1){
+        root = construct_BST(root, data);
+        takeInput(root);
+    }
+
+    return ;
+}
+
+Node* Flatten_BST(Node* &root){
+    if(root == nullptr){
+        return root;
+    }
+    
+    Node* left = root->left;
+    
+    if(left != nullptr){
+        left = root->left;
+        root->left = nullptr;
+    }
+    
+    Node* temp = left;
+    
+    while(temp != nullptr && temp->right != nullptr){
+        temp = temp->right;
+    }
+    
+    
+    if(temp != nullptr){
+        temp->right = root;
+    }
+    
+    if(left != nullptr){
+        root = left;
+    }
+    
+    if(left != nullptr){
+       Node* op1 = Flatten_BST(root);
+    }
+    
+    else{
+        Node* op2 = Flatten_BST(root->right);
+    }
+    
+    return root;
+    
+}
+
 
 int main(){
 
