@@ -119,6 +119,36 @@ Node* Balance_BST(Node* &root, int start, int end, vector<int> &result){
     return root;
 }
 
+// using preOrder array construct the BST.... 
+
+Node* BST(Node* root, int data){
+    if(root == nullptr){
+        root = new Node(data);
+        return root;
+    }
+    
+    if(data < root->data){
+        root->left = BST(root->left, data);
+    }
+    
+    else{
+        root->right = BST(root->right, data);
+    }
+    
+    return root;
+}
+
+Node* Bst(int pre[], int size) {
+    Node* root = nullptr;
+    
+    for(int i = 0; i < size; i++){
+        int data = pre[i];
+        root = BST(root, data);
+    }
+    
+    return root;
+}
+
 
 int main(){
 
