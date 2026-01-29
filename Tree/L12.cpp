@@ -48,6 +48,9 @@ void takeInput(Node* &root){
     return ;
 }
 
+
+//  Convert BST to flatten BST...
+
 Node* Flatten_BST(Node* &root){
     if(root == nullptr){
         return root;
@@ -85,6 +88,35 @@ Node* Flatten_BST(Node* &root){
     
     return root;
     
+}
+
+// Normal BST TO Balanace BST...
+
+void inOrder(Node* root, vector<int> &result){
+    if(root == nullptr){
+        return ;
+    }
+    
+    inOrder(root->left, result);
+    result.push_back(root->data);
+    inOrder(root->right, result);
+}
+
+Node* Balance_BST(Node* &root, int start, int end, vector<int> &result){
+    if(start > end){
+        return nullptr;
+    }
+    
+    int mid = start + (end - start) / 2;
+    int data = result[mid];
+    
+    root = new Node(data);
+    
+    root->left = Balance_BST(root->left, start, mid-1, result);
+    
+    root->right = Balance_BST(root->right, mid+1, end, result);
+    
+    return root;
 }
 
 
