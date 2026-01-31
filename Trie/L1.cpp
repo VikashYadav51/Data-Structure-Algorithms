@@ -59,7 +59,6 @@ class Trie{
 
             child = child->children[index];
             i++;
-
         }
 
         return child->isTerminal;
@@ -89,14 +88,10 @@ class Trie{
 
 int main(){
     Trie* t1 = new Trie();
-    t1->insert_word("ABCD");
+    t1->insert_word("abcd");
 
-    bool ans = t1->search_word("ABCDE");
-    cout << " ans "<< ans  << endl;
+     bool ans = t1->search_word("abce");
+     cout << " ans "<< ans  << endl;
 
-    t1->remove_element("ABCD");
-
-    bool ans1 = t1->search_word("ABCD");
-    cout << " ans "<< ans1  << endl;
 
 }
