@@ -221,7 +221,7 @@ Node* delete_element(Node* root, int target){
         if(root->left != nullptr && root->right != nullptr){
             int value = predessor(root) ->data;
             root->data = value;
-            root->left = delete_element(root, value);
+            root->left = delete_element(root->left, value);
             return root;
         }
     }
