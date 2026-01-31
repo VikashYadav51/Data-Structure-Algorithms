@@ -153,6 +153,8 @@ void k_smallest_element(Node* root, int k, int &count, int &value){
     }
 
     k_smallest_element(root->right, k, count, value);
+
+    return ;
 }
 
 Node* LCA(Node* root, int n1, int n2){
