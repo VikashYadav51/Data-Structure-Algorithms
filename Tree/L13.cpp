@@ -17,7 +17,7 @@ class Node{
     }
 };
 
-Node* construct_BST(Node* root, int data){
+Node* construct_BST(Node* &root, int data){
     if(root == nullptr){
         root = new Node(data);
         return root;
@@ -43,7 +43,7 @@ void take_input(Node* &root){
         return ;
     }
     
-    root = construct_BST(root, data);
+    construct_BST(root, data);
 
     take_input(root);
 
@@ -51,8 +51,9 @@ void take_input(Node* &root){
 
 }
 
-
-
 int main(){
+    Node* root = nullptr;
+    take_input(root);
+
 
 }
