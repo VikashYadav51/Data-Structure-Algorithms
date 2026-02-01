@@ -164,6 +164,8 @@ void print_boundary_element(Node* root){
     }
 }
 
+// if vertical order is matter then we have to use this method then we have took two int value....
+
 void print_verticalorder(Node* root){
     if(root == nullptr){
         return  ;
@@ -204,6 +206,8 @@ void print_verticalorder(Node* root){
     return ;
 }
 
+
+// if vertical order does not matter then we have to use this method....
 void print_vertical_order(Node* root){
     if(root == nullptr){
         return ;
