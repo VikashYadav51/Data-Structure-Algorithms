@@ -1,8 +1,7 @@
 #include<iostream>
 #include<queue>
-#include<vector>
 #include<map>
-
+#include<unordered_map>
 
 using namespace std;
 
@@ -22,7 +21,7 @@ class Node{
 Node* built_tree(){
     int data;
     cout <<"Enter the data "<< endl;
-    cin>> data;
+    cin >> data;
 
     if(data == -1){
         return nullptr;
@@ -30,109 +29,144 @@ Node* built_tree(){
 
     Node* root = new Node(data);
 
-    cout <<"Enter the data left side of "<< data <<" -> "<< endl;
+    cout <<"Enter the data left side of "<< data << endl;
     root->left = built_tree();
 
-    cout <<"Enter the data right side of "<< data <<" -> "<< endl;
+    cout <<"Enter the data right side of "<< data << endl;
     root->right = built_tree();
 
     return root;
+
 }
 
-Node* findNode(Node* root, int target){
+Node* find_root(Node* root, int n1){
     if(root == nullptr){
         return nullptr;
     }
-    
-    if(root->data == target){
+
+    if(root->data == n1){
         return root;
     }
-    
-    Node* left = findNode(root->left, target);
+
+    Node* left = find_root(root->left, n1);
+
+    Node* right = find_root(root->right, n1);
+
     if(left != nullptr){
         return left;
     }
-    
-    Node*right = findNode(root->right, target);
-    if(right != nullptr){
+
+    else if(right != nullptr){
         return right;
     }
-    
-    return nullptr;
+
+    else{
+        return nullptr;
+    }
 }
-    
-void child_to_parent(Node* root, map<Node*, Node*> &mapping){
+
+void mapping_node(Node* root, unordered_map<Node* , Node*> &mapping){
     if(root == nullptr){
         return ;
     }
-    
+
     if(root->left){
         mapping[root->left] = root;
     }
-    
+
     if(root->right){
         mapping[root->right] = root;
     }
-    
-    
-    child_to_parent(root->left, mapping);
-    
-    child_to_parent(root->right, mapping);
-}
-    
-    
-    
-int calculateTime(Node* root, map<Node*, Node*> &mapping){
-    queue<pair<Node*, int> > q1;
-    q1.push({root, 0});
-    map<Node*, bool> burn;
-    burn[root] = true;
-    
-    int time = 0;
-    
-    while(!q1.empty()){
-        Node* temp = q1.front().first;
-        int t1 = q1.front().second;
-        
-        q1.pop();
-        
-        time = max(time, t1);
-        // cout <<"time "<< t1 <<"    " << time << endl;
-        
-        if(temp->left && !burn[temp->left]){
-            q1.push({temp->left, t1+1});
-            burn[temp->left] = true;
-        }
-        
-        if(temp->right && !burn[temp->right]){
-            q1.push({temp->right, t1+1});
-            burn[temp->right] = true;
-        }
-        
-        if(mapping.find(temp) != mapping.end()){
-            Node* value = mapping[temp];
-            if(value != nullptr && !burn[value]){
-                burn[value] = true;
-                q1.push({value, t1+1});
-            }
-        }
-    }
-    // cout << time << endl;
-    return time;
+
+    mapping_node(root->left, mapping);
+
+    mapping_node(root->right, mapping);
+
+    return ;
 }
 
-int minTime(Node* root, int target) {
-    map<Node*, Node* > mapping;
-    
-    child_to_parent(root, mapping);
-    
-    Node* newroot = findNode(root, target);
-    
-    int time = calculateTime(newroot, mapping);
-    
+int totalTime(Node* root, unordered_map<Node*, Node* > mapping){
+
+    queue<Node* > q1;
+
+    q1.push(root);
+
+    int time = 0;
+
+    unordered_map<Node*, bool > visited;
+    visited[root] = true;
+
+    while(!q1.empty()){
+        Node* temp = q1.front();
+        q1.pop();
+        bool flag = false;
+
+        if(temp->left){
+            if(!visited[temp->left]){
+                visited[temp->left] = true;
+                q1.push(temp->left);
+                flag = true;
+            }
+        }
+
+        if(temp->right){
+            if(!visited[temp->right]){
+                visited[temp->right] = true;
+                q1.push(temp->right);
+                flag = true;
+            }
+        }
+
+        if(mapping.find(temp) != mapping.end()){
+            Node* value = mapping[temp];
+            if(value != nullptr && !visited[value]){
+                visited[value] = true;
+                flag = true;
+                q1.push(value);
+            }
+        }
+
+        if(flag){
+            time++;
+        }
+    }
+
     return time;
+
 }
 
 int main(){
+    Node* root = nullptr;
+
+    root = built_tree();
+
+    int n1 = 1;
+
+    // 1 2 4 -1 -1 5 7 -1 -1 6 -1 -1 3 -1 8 -1 -1
+
+    Node* node = find_root(root, n1);
+    if(node == nullptr){
+        cout <<" node is not exist..."<< endl;
+    }
+    else{
+        cout << node->data << endl;
+    }
+
+    cout << root->data << endl;
+
+
+    unordered_map<Node*, Node*> mapping;
+
+    mapping_node(root, mapping);
+
+    for(auto it : mapping){
+        cout<<"First node "<< it.first->data <<"  Sceond node  "<< it.second->data << endl;
+    }
+
+    cout << endl;
+
+    int time = totalTime(node, mapping);
+    cout <<"Totla time to burn treee "<< time << endl;
+    
 
 }
