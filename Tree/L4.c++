@@ -152,35 +152,35 @@ void K_sum_path(Node* root, int &count, vector<int> &result, int value){
     return ;
 }
 
-Node* K_Ancestor(Node* root, int n1, int &count, int &variable){
+Node* k_anchestor(Node* root, int n1, int &count){
     if(root == nullptr){
         return nullptr;
     }
 
     if(root->data == n1){
+        count--;
         return root;
     }
 
-    Node* left = K_Ancestor(root->left, n1, count, variable);
+    Node* left = k_anchestor(root->left, n1, count);
 
-    Node* right = K_Ancestor(root->right, n1, count, variable);
+    Node* right = k_anchestor(root->right, n1, count);
 
-    if(left){
-        count--;
+    if(left != nullptr){
         if(count == 0){
-            variable = root->data;
-            count = INT32_MAX;
+            return root;
         }
-        return root;
+        count--;
+        return left;
     }
+    
 
-    else if(right){
-        count--;
+    else if(right != nullptr){
         if(count == 0){
-            variable = root->data;
-            count = INT32_MAX;
+            return root;
         }
-        return root;
+        count--;
+        return right;
     }
 
     else{
