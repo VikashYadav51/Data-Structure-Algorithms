@@ -40,7 +40,7 @@ string reverseWords(string s1){
 
 
 int main(){
-    string s1 = "Hello World India   ";
+    string s1 = "Hello         World India   ";
     string s2 = reverseWords(s1);
     cout << s2 <<",  "<< s2.length()<< endl;
 }
