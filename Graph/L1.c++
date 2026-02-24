@@ -101,10 +101,10 @@ int main(){
         cout << i <<" --> ";
 
         for(int j = 0; j < list[i].size(); j++){
-            cout << "(" << list[i][j].first <<", "<< list[i][j].second <<") ";
+            cout << "( " << list[i][j].first <<",  "<< list[i][j].second <<" ), ";
         }
 
-        cout << endl;
+        cout << endl << endl;
     }
     
     return 0;
