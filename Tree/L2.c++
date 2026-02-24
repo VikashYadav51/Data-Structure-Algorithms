@@ -134,6 +134,38 @@ pair<bool, int> check_sum_tree(Node* root){
     }
 }
 
+bool check_identical(Node* root1, Node* root2){
+    if(root1 == nullptr && root2 == nullptr){
+        return true;
+    }
+
+    if(root1->data != root2->data){
+        return false;
+    }
+
+    if(root1 == nullptr && root2 != nullptr){
+        return false;
+    }
+
+    if(root1 != nullptr && root2 == nullptr){
+        return false;
+    }
+
+    bool op1 = check_identical(root1->left, root2->left);
+
+    bool op2 = check_identical(root1->right, root2->right);
+
+    if(op1 && op2){
+        return  true;
+    }
+
+    else{
+        return false;
+    }
+
+}
+
+
 
 
 int main(){
