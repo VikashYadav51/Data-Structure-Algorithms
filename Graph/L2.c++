@@ -55,10 +55,9 @@ int main(){
         }
     }
 
+    cout <<"Prin the element in BFS Order "<< endl;
+
     for(auto it : result){
         cout << it << ",  ";
     }
-
-
-
 }
