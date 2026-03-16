@@ -16,12 +16,12 @@ void DFS(int start, vector<bool> &visited, vector<int> &result, vector<int> list
 
 int main(){
     int n;
-    cout <<"Enter the value of n "<< endl;
-    cin>> n;
+    cout <<"Enter the value of total number of nodes "<< endl;
+    cin >> n;
 
     int m;
-    cout <<"Enter the value of m "<< endl;
-    cin>> m;
+    cout <<"Enter the value of total edges "<< endl;
+    cin >> m;
 
     vector<int> list[n+1];
 
@@ -43,7 +43,7 @@ int main(){
         }
     }
 
-    cout <<"Prin the graph element in DFS order "<< endl;
+    cout <<"Print the graph element in DFS order "<< endl;
 
     for(auto it  : result){
         cout << it <<",  ";
