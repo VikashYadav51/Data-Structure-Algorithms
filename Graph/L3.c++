@@ -43,6 +43,8 @@ int main(){
         }
     }
 
+    cout <<"Prin the graph element in DFS order "<< endl;
+
     for(auto it  : result){
         cout << it <<",  ";
     }
