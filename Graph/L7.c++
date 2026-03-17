@@ -1,66 +1,76 @@
 #include<iostream>
 #include<vector>
 #include<queue>
- 
+
 using namespace std;
 
-// ....Rotten Orange Problems....
+int main(){
+    
+    int n;
+    cout <<"Enter the total number of row "<< endl;
+    cin >> n;
 
-int orangesRotting(vector<vector<int>>& grid) {
-    queue<pair <pair<int, int> , int> > q1;
+    int m;
+    cout <<"Enter the total number of column "<< endl;
+    cin >> m;
 
-    int n = grid.size();
-    int m = grid[0].size();
-    vector<vector<bool> > visited(n, vector<bool> (m, 0));
+
+    vector<vector<int> > matrix(n, vector<int>(m));
 
     for(int i = 0; i < n; i++){
         for(int j = 0; j < m; j++){
-            if(grid[i][j] == 2){
-                q1.push({{i, j}, 0});
-                visited[i][j] = true;
-            }
+            cin >> matrix[i][j];
         }
     }
 
-    int time = 0;
+    vector<vector<int> > visited(n, vector<int>(m, 0));
+    
+    queue<pair<pair<int, int>, int > > q1;
+    
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
+            q1.push({{i, j}, 0});
+        }
+    }
+    
+    int maxiTime = -1;
 
     while(!q1.empty()){
         int row = q1.front().first.first;
         int col = q1.front().first.second;
         int t1 = q1.front().second;
-
-        time = max(time, t1);
-
         q1.pop();
+
+        maxiTime = max(maxiTime, t1);
 
         int drow[] = {-1, 0, 1, 0};
         int dcol[] = {0, 1, 0, -1};
 
-        for(int i = 0; i < 4; i++){
-            int row1 = row + drow[i];
-            int col1 = col  +dcol[i];
+        int rowSize = matrix.size();
+        int colSize = matrix[0].size();
 
-            if(row1 >= 0 && row1 < n && col1 >= 0 && col1 < m){
-                if(!visited[row1][col1] && grid[row1][col1] == 1){
-                    q1.push({{row1, col1}, t1 + 1});
-                    visited[row1][col1] = true;
-                    grid[row1][col1] = 2;
+        for(int i = 0; i < 4; i++){
+            int n = row + drow[i];
+            int m = col + dcol[i];
+            if(n >= 0 && n < rowSize && m >= 0 && m < colSize){
+                if(matrix[n][m] == 1 && !visited[n][m]){
+                    matrix[n][m] = 2;
+                    visited[n][m] = true;
+                    q1.push({{n, m}, t1 + 1});
                 }
             }
         }
     }
 
+    cout <<"Rotten Orange Algortrithms "<< endl;
+
     for(int i = 0; i < n; i++){
         for(int j = 0; j < m; j++){
-            if(grid[i][j] == 1){
+            if(matrix[i][j] == 1){
                 return -1;
             }
         }
     }
 
-    return  time;
-}
-
-int main(){
-
+   cout << maxiTime << endl;
 }
