@@ -4,6 +4,8 @@
 
 using namespace std;
 
+// First Method......
+
 void BFS(int sr, int sc, int color, int newcolor, vector<vector<bool> > &visited, vector<vector<int> > &grid){
     visited[sr][sc] = true;
     queue<pair<int, int> > q1;
@@ -65,6 +67,79 @@ vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int co
 
 
 
-int main(){
+// Second Method....both the method Approach wil be same but writing of the code is differnent...
 
+int main(){
+    
+    int n;
+    cout <<"Enter the total number of row "<< endl;
+    cin >> n;
+
+    int m;
+    cout <<"Enter the total number of column "<< endl;
+    cin >> m;
+
+
+    vector<vector<int> > matrix(n, vector<int>(m));
+
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
+            cin >> matrix[i][j];
+        }
+    }
+
+    int sr;
+    cout <<"Enter the value of sr "<< endl;
+    cin >> sr;
+
+    int sc;
+    cout <<"Enter the value of sc "<< endl;
+    cin >> sc;
+
+    int newColor;
+    cout <<"Enter the value of newColor "<< endl;
+    cin >> newColor;
+
+    vector<vector<int> > visited(n, vector<int>(m, 0));
+
+    queue<pair<int, int> > q1;
+
+    q1.push({sr, sc});
+    visited[sr][sc] = true;
+    matrix[sr][sc] = newColor;
+
+    while(!q1.empty()){
+        int row = q1.front().first;
+        int col = q1.front().second;
+        q1.pop();
+
+        int drow[] = {-1, 0, 1, 0};
+        int dcol[] = {0, 1, 0, -1};
+
+        int rowSize = matrix.size();
+        int colSize = matrix[0].size();
+
+        for(int i = 0; i < 4; i++){
+            int n = row + drow[i];
+            int m = col + dcol[i];
+            if(n >= 0 && n < rowSize && m >= 0 && m < colSize){
+                if(matrix[n][m] == matrix[sr][sc] && !visited[i][m]){
+                    matrix[n][m] = newColor;
+                    visited[n][m] = true;
+                    q1.push({n, m});
+                }
+            }
+        }
+    }
+
+    cout <<"Flood fill Algorithms "<< endl;
+
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
+            cout << matrix[i][j]<<",  ";
+        }
+        cout << endl;
+    }
+
+    return 0;
 }
